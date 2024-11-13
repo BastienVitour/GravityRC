@@ -8,7 +8,6 @@ public class CharacterScript : MonoBehaviour
     public ConstantForce2D myConstantForce;
     public Direction direction;
     private Camera mainCamera;
-
     // Start is called before the first frame update
     void Start()
     {
