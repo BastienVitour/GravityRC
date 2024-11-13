@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CharacterScript : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class CharacterScript : MonoBehaviour
     public Direction direction;
     public Vector3 gameObjectPosition;
     private Camera mainCamera;
+    public Vector2 spawn = new Vector2(0,0);
     public int playerSpeed = 500;
     private bool canChangeGravity = false;
 
@@ -108,8 +110,12 @@ public class CharacterScript : MonoBehaviour
         }
     }
 
-    public void Kys(Vector2 pos) {
-        gameObject.transform.position = pos;
+    public void Kys() {
+        transform.position = spawn;
+    }
+
+    public void NextLevel(string sceneName) {
+        SceneManager.LoadScene(sceneName);
     }
 }
 
@@ -119,3 +125,4 @@ public enum Direction {
     LEFT,
     RIGHT
 }
+ 
