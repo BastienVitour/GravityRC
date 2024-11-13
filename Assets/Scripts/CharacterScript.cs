@@ -7,6 +7,7 @@ public class CharacterScript : MonoBehaviour
     public Rigidbody2D myRigidBody;
     public Collider2D myCollider;
     public Direction direction;
+    public Vector3 gameObjectPosition;
     private Camera mainCamera;
     public int playerSpeed = 250;
 
@@ -64,12 +65,16 @@ public class CharacterScript : MonoBehaviour
                 break;
         }
 
-        Vector3 gameObjectPosition = gameObject.transform.position;
+        gameObjectPosition = gameObject.transform.position;
         mainCamera.transform.position = new Vector3(gameObjectPosition.x, gameObjectPosition.y, -10);
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
         Debug.Log(other.GetContact(0).point);
+    }
+
+    public void Kys(Vector2 pos) {
+        gameObject.transform.position = pos;
     }
 }
 
