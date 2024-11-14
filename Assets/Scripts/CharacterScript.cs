@@ -58,30 +58,34 @@ public class CharacterScript : MonoBehaviour
         switch (direction)
         {
             case Direction.UP:
-                myRigidBody.velocity = Vector2.up * playerSpeed * Time.deltaTime;
+                myRigidBody.velocity = playerSpeed * Time.deltaTime * Vector2.up ;
                 break;
             case Direction.DOWN:
-                myRigidBody.velocity = Vector2.down * playerSpeed * Time.deltaTime;
+                myRigidBody.velocity = playerSpeed * Time.deltaTime * Vector2.down;
                 break;
             case Direction.LEFT:
-                myRigidBody.velocity = Vector2.left * playerSpeed * Time.deltaTime;
+                myRigidBody.velocity = playerSpeed * Time.deltaTime * Vector2.left;
                 break;
             case Direction.RIGHT:
-                myRigidBody.velocity = Vector2.right * playerSpeed * Time.deltaTime;
+                myRigidBody.velocity = playerSpeed * Time.deltaTime * Vector2.right;
                 break;
             default:
-                myRigidBody.velocity = Vector2.down * playerSpeed * Time.deltaTime;
+                myRigidBody.velocity = playerSpeed * Time.deltaTime * Vector2.up;
                 break;
         }
 
         gameObjectPosition = gameObject.transform.position;
         mainCamera.transform.position = new Vector3(gameObjectPosition.x, gameObjectPosition.y, -10);
+        
+        if(Input.GetKeyUp(KeyCode.Escape)) {
+            SceneManager.LoadScene("HomeScene");
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Vector3 playerPosition = gameObject.transform.position;
-        Vector3 contactPoint = other.GetContact(0).point;
+        Vector2 playerPosition = gameObject.transform.position;
+        Vector2 contactPoint = other.GetContact(0).point;
         switch (direction)
         {
             case Direction.UP:
