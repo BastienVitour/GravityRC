@@ -925,6 +925,11 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!212 &250465151 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 1915583371514220802, guid: af613bae4f90e244fa3293e4e848d840, type: 3}
+  m_PrefabInstance: {fileID: 1255882420}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &365666274
 GameObject:
   m_ObjectHideFlags: 0
@@ -2932,13 +2937,17 @@ PrefabInstance:
       propertyPath: door
       value: 
       objectReference: {fileID: 855923004}
+    - target: {fileID: 1321310474326939205, guid: af613bae4f90e244fa3293e4e848d840, type: 3}
+      propertyPath: spriteRenderer
+      value: 
+      objectReference: {fileID: 250465151}
     - target: {fileID: 4544609470970463441, guid: af613bae4f90e244fa3293e4e848d840, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 32.2
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 4544609470970463441, guid: af613bae4f90e244fa3293e4e848d840, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.2
+      value: 4.32
       objectReference: {fileID: 0}
     - target: {fileID: 4544609470970463441, guid: af613bae4f90e244fa3293e4e848d840, type: 3}
       propertyPath: m_LocalPosition.z
