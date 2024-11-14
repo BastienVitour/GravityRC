@@ -13,8 +13,6 @@ public class CharacterScript : MonoBehaviour
     public Vector2 spawn = new Vector2(0,0);
     public int playerSpeed = 500;
     private bool canChangeGravity = false;
-    public SpriteRenderer mySpriteRenderer;
-    public Sprite landingSprite;
     public Animator animator;
 
     // Start is called before the first frame update
