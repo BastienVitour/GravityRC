@@ -14,64 +14,48 @@ public class CharacterScript : MonoBehaviour
     public int playerSpeed = 500;
     private bool canChangeGravity = false;
     public Animator animator;
+    public float gravityScale = 15;
+    private AudioSource gravityInversionSound;
+    private AudioSource landingSound;
 
     // Start is called before the first frame update
     void Start()
     {
         direction = Direction.DOWN;
         mainCamera = Camera.main;
+        AudioSource[] sources = GetComponents<AudioSource>();
+        gravityInversionSound = sources[0];
+        landingSound = sources[1];
     }
 
     // Update is called once per frame
     void Update()
     {
         if(canChangeGravity) {
-            if(Input.GetKeyUp(KeyCode.UpArrow)) {
-                direction = Direction.UP;
-                transform.rotation = Quaternion.identity;
-                transform.rotation *= Quaternion.Euler(0, 0, 180);
-                myRigidBody.constraints = RigidbodyConstraints2D.FreezePositionX;
-                canChangeGravity = false;
-            }
-            else if(Input.GetKeyUp(KeyCode.LeftArrow)) {
-                direction = Direction.LEFT;
-                transform.rotation = Quaternion.identity;
-                transform.rotation *= Quaternion.Euler(0, 0, -90);
-                myRigidBody.constraints = RigidbodyConstraints2D.FreezePositionY;
-                canChangeGravity = false;
-            }
-            else if(Input.GetKeyUp(KeyCode.RightArrow)) {
-                direction = Direction.RIGHT;
-                transform.rotation = Quaternion.identity;
-                transform.rotation *= Quaternion.Euler(0, 0, 90);
-                myRigidBody.constraints = RigidbodyConstraints2D.FreezePositionY;
-                canChangeGravity = false;
-            }
-            else if(Input.GetKeyUp(KeyCode.DownArrow)) {
-                direction = Direction.DOWN;
-                transform.rotation = Quaternion.identity;
-                transform.rotation *= Quaternion.Euler(0, 0, 0);
-                myRigidBody.constraints = RigidbodyConstraints2D.FreezePositionX;
-                canChangeGravity = false;
-            }
+            ChangeGravity();
         }
 
         switch (direction)
         {
             case Direction.UP:
-                myRigidBody.velocity = playerSpeed * Time.deltaTime * Vector2.up ;
+                Physics2D.gravity = new Vector2(0, gravityScale);
+                //myRigidBody.velocity = playerSpeed * Time.deltaTime * Vector2.up ;
                 break;
             case Direction.DOWN:
-                myRigidBody.velocity = playerSpeed * Time.deltaTime * Vector2.down;
+                Physics2D.gravity = new Vector2(0, -gravityScale);
+                //myRigidBody.velocity = playerSpeed * Time.deltaTime * Vector2.down;
                 break;
             case Direction.LEFT:
-                myRigidBody.velocity = playerSpeed * Time.deltaTime * Vector2.left;
+                Physics2D.gravity = new Vector2(-gravityScale, 0);
+                //myRigidBody.velocity = playerSpeed * Time.deltaTime * Vector2.left;
                 break;
             case Direction.RIGHT:
-                myRigidBody.velocity = playerSpeed * Time.deltaTime * Vector2.right;
+                Physics2D.gravity = new Vector2(gravityScale, 0);
+                //myRigidBody.velocity = playerSpeed * Time.deltaTime * Vector2.right;
                 break;
             default:
-                myRigidBody.velocity = playerSpeed * Time.deltaTime * Vector2.up;
+                Physics2D.gravity = new Vector2(0, -gravityScale);
+                //myRigidBody.velocity = playerSpeed * Time.deltaTime * Vector2.up;
                 break;
         }
 
@@ -91,26 +75,38 @@ public class CharacterScript : MonoBehaviour
         {
             case Direction.UP:
                 if(contactPoint.y > playerPosition.y) {
-                    canChangeGravity = true;
+                    landingSound.Play();
                     animator.SetTrigger("Landing");
+                    StartCoroutine(mainCamera.GetComponent<CameraShakeScript>().Shaking());
+                    animator.SetBool("Falling", false);
+                    canChangeGravity = true;
                 }
                 break;
             case Direction.DOWN:
                 if(contactPoint.y < playerPosition.y) {
-                    canChangeGravity = true;
+                    landingSound.Play();
                     animator.SetTrigger("Landing");
+                    StartCoroutine(mainCamera.GetComponent<CameraShakeScript>().Shaking());
+                    animator.SetBool("Falling", false);
+                    canChangeGravity = true;
                 }
                 break;
             case Direction.LEFT:
                 if(contactPoint.x < playerPosition.x) {
-                    canChangeGravity = true;
+                    landingSound.Play();
                     animator.SetTrigger("Landing");
+                    StartCoroutine(mainCamera.GetComponent<CameraShakeScript>().Shaking());
+                    animator.SetBool("Falling", false);
+                    canChangeGravity = true;
                 }
                 break;
             case Direction.RIGHT:
                 if(contactPoint.x > playerPosition.x) {
-                    canChangeGravity = true;
+                    landingSound.Play();
                     animator.SetTrigger("Landing");
+                    StartCoroutine(mainCamera.GetComponent<CameraShakeScript>().Shaking());
+                    animator.SetBool("Falling", false);
+                    canChangeGravity = true;
                 }
                 break;
             default:
@@ -125,6 +121,46 @@ public class CharacterScript : MonoBehaviour
 
     public void NextLevel(string sceneName) {
         SceneManager.LoadScene(sceneName);
+    }
+
+    private void ChangeGravity()
+    {
+        if(Input.GetKeyUp(KeyCode.UpArrow) && direction != Direction.UP) {
+            gravityInversionSound.Play();
+            direction = Direction.UP;
+            transform.rotation = Quaternion.identity;
+            transform.rotation *= Quaternion.Euler(0, 0, 180);
+            myRigidBody.constraints = RigidbodyConstraints2D.FreezePositionX;
+            canChangeGravity = false;
+            animator.SetBool("Falling", true);
+        }
+        else if(Input.GetKeyUp(KeyCode.LeftArrow) && direction != Direction.LEFT) {
+            gravityInversionSound.Play();
+            direction = Direction.LEFT;
+            transform.rotation = Quaternion.identity;
+            transform.rotation *= Quaternion.Euler(0, 0, -90);
+            myRigidBody.constraints = RigidbodyConstraints2D.FreezePositionY;
+            canChangeGravity = false;
+            animator.SetBool("Falling", true);
+        }
+        else if(Input.GetKeyUp(KeyCode.RightArrow) && direction != Direction.RIGHT) {
+            gravityInversionSound.Play();
+            direction = Direction.RIGHT;
+            transform.rotation = Quaternion.identity;
+            transform.rotation *= Quaternion.Euler(0, 0, 90);
+            myRigidBody.constraints = RigidbodyConstraints2D.FreezePositionY;
+            canChangeGravity = false;
+            animator.SetBool("Falling", true);
+        }
+        else if(Input.GetKeyUp(KeyCode.DownArrow) && direction != Direction.DOWN) {
+            gravityInversionSound.Play();
+            direction = Direction.DOWN;
+            transform.rotation = Quaternion.identity;
+            transform.rotation *= Quaternion.Euler(0, 0, 0);
+            myRigidBody.constraints = RigidbodyConstraints2D.FreezePositionX;
+            canChangeGravity = false;
+            animator.SetBool("Falling", true);
+        }
     }
 }
 
