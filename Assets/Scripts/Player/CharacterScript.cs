@@ -116,7 +116,19 @@ public class CharacterScript : MonoBehaviour
     }
 
     public void Kys() {
+        animator.SetTrigger("Death");
+
+        StartCoroutine(DelayDeath(animator.GetCurrentAnimatorStateInfo(0).length));
+    }
+
+    IEnumerator DelayDeath(float delay = 0)
+    {
+        yield return new WaitForSeconds(0.75f);
         transform.position = spawn;
+        direction = Direction.DOWN;
+        transform.rotation = Quaternion.identity;
+        transform.rotation *= Quaternion.Euler(0, 0, 0);
+        myRigidBody.constraints = RigidbodyConstraints2D.FreezePositionX;
     }
 
     public void NextLevel(string sceneName) {
