@@ -99,11 +99,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5131a66144286764cbfb96bb5984fab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Respawn: {fileID: 8589068542474499337, guid: 8259ad52e709a4c18a79f1630d5e428c, type: 3}
-  Character: {fileID: 8589068542474499337, guid: 8259ad52e709a4c18a79f1630d5e428c, type: 3}
-  m_killPlayer:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!50 &3125533678367117607
 Rigidbody2D:
   serializedVersion: 4
