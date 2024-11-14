@@ -8,7 +8,9 @@ public class CharacterScript : MonoBehaviour
     public Rigidbody2D myRigidBody;
     public Collider2D myCollider;
     public Direction direction;
+    public Vector3 gameObjectPosition;
     private Camera mainCamera;
+    public Vector2 spawn = new Vector2(0,0);
     public int playerSpeed = 500;
     private bool canChangeGravity = false;
 
@@ -72,7 +74,7 @@ public class CharacterScript : MonoBehaviour
                 break;
         }
 
-        Vector3 gameObjectPosition = gameObject.transform.position;
+        gameObjectPosition = gameObject.transform.position;
         mainCamera.transform.position = new Vector3(gameObjectPosition.x, gameObjectPosition.y, -10);
         
         if(Input.GetKeyUp(KeyCode.Escape)) {
@@ -111,6 +113,14 @@ public class CharacterScript : MonoBehaviour
                 break;
         }
     }
+
+    public void Kys() {
+        transform.position = spawn;
+    }
+
+    public void NextLevel(string sceneName) {
+        SceneManager.LoadScene(sceneName);
+    }
 }
 
 public enum Direction {
@@ -119,3 +129,4 @@ public enum Direction {
     LEFT,
     RIGHT
 }
+ 
