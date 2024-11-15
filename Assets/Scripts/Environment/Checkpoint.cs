@@ -9,10 +9,12 @@ public class Checkpoint : MonoBehaviour
 
     public SpriteRenderer spriteRenderer;
     public Sprite checkpointOn;
+    public AudioSource audioSource;
+    
     // Start is called before the first frame update
     void Start()
     {
-
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -25,6 +27,7 @@ public class Checkpoint : MonoBehaviour
         if (other.tag == "Player") // filter the objects that collide with the checkpoint. You can assign the tag in the inspector
         {
             pointupdate = new Vector2( transform.position.x,transform.position.y);
+            audioSource.Play();
             other.GetComponent<CharacterScript>().spawn = pointupdate;
             spriteRenderer.sprite = checkpointOn;
         }
