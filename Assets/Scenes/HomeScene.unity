@@ -581,7 +581,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Welcome the the Gravity Research Center
+  m_text: Welcome to the Gravity Research Center
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4d1e05f358be64b4e83a836c52799da7, type: 2}
   m_sharedMaterial: {fileID: -8563458319326859721, guid: 4d1e05f358be64b4e83a836c52799da7, type: 2}
@@ -1838,7 +1838,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Quitter
+  m_text: Leave
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4d1e05f358be64b4e83a836c52799da7, type: 2}
   m_sharedMaterial: {fileID: -8563458319326859721, guid: 4d1e05f358be64b4e83a836c52799da7, type: 2}
