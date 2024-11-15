@@ -39,23 +39,18 @@ public class CharacterScript : MonoBehaviour
         {
             case Direction.UP:
                 Physics2D.gravity = new Vector2(0, gravityScale);
-                //myRigidBody.velocity = playerSpeed * Time.deltaTime * Vector2.up ;
                 break;
             case Direction.DOWN:
                 Physics2D.gravity = new Vector2(0, -gravityScale);
-                //myRigidBody.velocity = playerSpeed * Time.deltaTime * Vector2.down;
                 break;
             case Direction.LEFT:
                 Physics2D.gravity = new Vector2(-gravityScale, 0);
-                //myRigidBody.velocity = playerSpeed * Time.deltaTime * Vector2.left;
                 break;
             case Direction.RIGHT:
                 Physics2D.gravity = new Vector2(gravityScale, 0);
-                //myRigidBody.velocity = playerSpeed * Time.deltaTime * Vector2.right;
                 break;
             default:
                 Physics2D.gravity = new Vector2(0, -gravityScale);
-                //myRigidBody.velocity = playerSpeed * Time.deltaTime * Vector2.up;
                 break;
         }
 

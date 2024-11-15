@@ -6,13 +6,16 @@ public class Button : MonoBehaviour
 {
     public GameObject door;
     public SpriteRenderer spriteRenderer;
-    public AudioSource audioSource;
+    public AudioSource buttonPress;
+    public AudioSource doorOpen;
     public bool hasBeenPressed = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        AudioSource[] sources = GetComponents<AudioSource>();
+        buttonPress = sources[0];
+        doorOpen = sources[1];
     }
 
     // Update is called once per frame
@@ -24,10 +27,17 @@ public class Button : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == "Player" && !hasBeenPressed) // filter the objects that collide with the checkpoint. You can assign the tag in the inspector
         {
-            audioSource.Play();
+            StartCoroutine(PlayButtonSound());
             spriteRenderer.color = Color.green;
             Destroy(door);
             hasBeenPressed = true;
+            doorOpen.Play();
         }
+    }
+    
+    IEnumerator PlayButtonSound(){
+        buttonPress.Play();
+        yield return new WaitForSeconds(5f);
+        //yield return new WaitWhile (()=> buttonPress.isPlaying);
     }
 }
