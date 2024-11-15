@@ -10,6 +10,7 @@ public class Checkpoint : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public Sprite checkpointOn;
     public AudioSource audioSource;
+    private bool isCheckpointOn = false;
     
     // Start is called before the first frame update
     void Start()
@@ -24,12 +25,13 @@ public class Checkpoint : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.tag == "Player") // filter the objects that collide with the checkpoint. You can assign the tag in the inspector
+        if (other.tag == "Player" && !isCheckpointOn) // filter the objects that collide with the checkpoint. You can assign the tag in the inspector
         {
             pointupdate = new Vector2( transform.position.x,transform.position.y);
             audioSource.Play();
             other.GetComponent<CharacterScript>().spawn = pointupdate;
             spriteRenderer.sprite = checkpointOn;
+            isCheckpointOn = true;
         }
     }
 }
