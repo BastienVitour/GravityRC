@@ -39,6 +39,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BackgroundSpace
+    uniqueID: 49228731
+    locked: 0
+  - name: BackgroundWall
+    uniqueID: 2399912543
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 602620697
     locked: 0
