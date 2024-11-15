@@ -3925,7 +3925,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2088661223046366274, guid: 65c468641e9c9644d9a525207dfe3e2a, type: 3}
       propertyPath: NextLevelName
-      value: Level5
+      value: TheEnd
       objectReference: {fileID: 0}
     - target: {fileID: 6206533112550086607, guid: 65c468641e9c9644d9a525207dfe3e2a, type: 3}
       propertyPath: m_LocalScale.x

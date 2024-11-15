@@ -1,10 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MenuScript : MonoBehaviour
+public class EndScript : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -18,13 +17,13 @@ public class MenuScript : MonoBehaviour
         
     }
 
-    public void PlayLevel(int level)
-    {
-        SceneManager.LoadScene($"Level{level}");
-    }
-
-    public void LeaveApplication()
+    public void LeaveGame()
     {
         Application.Quit();
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene("HomeScene");
     }
 }
