@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 0}
+  spriteRenderer: {fileID: 1915583371514220802}
 --- !u!61 &200074610624071575
 BoxCollider2D:
   m_ObjectHideFlags: 0
